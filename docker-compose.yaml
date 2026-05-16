@@ -1,5 +1,3 @@
-docker-compose.yaml
-
 services:
   app:
     build:
@@ -28,30 +26,6 @@ services:
       timeout: 5s
       retries: 3
       start_period: 10s
-
-  db:
-    image: mysql:8.0
-    container_name: mike_db
-    environment:
-      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
-      MYSQL_DATABASE: ${MYSQL_DATABASE}
-      MYSQL_USER: ${MYSQL_USER}
-      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
-    ports:
-      - "3310:3306"
-    volumes:
-      - platform-db-data:/var/lib/mysql
-    networks:
-      - platform-network
-    healthcheck:
-      test: [ "CMD", "mysqladmin", "ping", "-h", "localhost" ]
-      interval: 10s
-      timeout: 5s
-      retries: 5
-      start_period: 15s
-
-volumes:
-  platform-db-data:
 
 networks:
   platform-network:
